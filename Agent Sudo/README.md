@@ -92,24 +92,63 @@ binwalk -e cutie.png
 
 ![image](https://user-images.githubusercontent.com/67756786/191739146-f0ca6795-5f5f-4c98-97c5-6f65578768a8.png)
 
-進入目錄後，發現8702.ZIP，解壓縮需要使用PASSWORD，解鎖ZIP PASSWORD很簡單，先使用zip2jhon取hash後再使用john破解即可
-```
+進入目錄後，發現8702.ZIP，解壓縮需要使用PASSWORD，解鎖ZIP PASSWORD很簡單，先使用zip2jhon取hash後再使用john破解即可，可發現密碼是alien
 
 ```
+zip2john 8072.zip > pw.hash
+john pw.hash
+```
+
+![image](https://user-images.githubusercontent.com/67756786/191780722-c23229d3-e4b1-4868-aa4c-ea1229ce8719.png)
+
+接著解壓所檔案，查看txt檔案，獲取QXJlYTUx字串
+
+```
+7z e 8702.zip
+cat To_agentR.txt
+```
+![image](https://user-images.githubusercontent.com/67756786/191791323-70cb3639-fc4d-47ab-9545-516274e9d15a.png)
+
+
 
 - [x] steg password
 
+剛剛知道有獲取一串字串，可以將它丟到(https://gchq.github.io/CyberChef/)，會自動判定他有可能是甚麼加密方式，並且自動幫你解密，之後獲得
+新字串Area51
+
+![image](https://user-images.githubusercontent.com/67756786/191793059-606d14df-d864-4e7e-a1e1-892d1d2ccd7a.png)
+
+因題目問steg password，因此利用此字串來解密另一張照片
 
 ```
+steghide extract -sf cute-alien.jpg -p Area51
 ```
+
+![image](https://user-images.githubusercontent.com/67756786/191794847-11f2edf8-9bab-4315-845a-7e9a993bdea3.png)
+
 
 - [x] Who is the other agent (in full name)?
 
+![image](https://user-images.githubusercontent.com/67756786/191795068-6bc4ab70-49b8-4ddf-91dc-35cb7dedb7bd.png)
 
-```
-```
 
 - [x] SSH password
+![image](https://user-images.githubusercontent.com/67756786/191795093-9ca85144-5c2c-475e-8d78-1402ecc3a231.png)
+
 
 ### Capture the user flag
+- [x] What is the user flag?
+
+連進去ssh
+
+```
+ssh james@ip
+```
+
+![image](https://user-images.githubusercontent.com/67756786/191795488-0b1ec176-48c9-4e44-9570-d9767bce21be.png)
+
+- [ ] What is the incident of the photo called?
 ### Privilege escalation
+- [x] CVE number for the escalation 
+- [x] What is the root flag?
+- [x] (Bonus) Who is Agent R?
