@@ -52,8 +52,64 @@ curl -A "R" -L 10.10.231.25
 
 
 ### Hash cracking and brute-force
+
 - [x] FTP password
-- [x] 
+
+這邊題目直接說brute-force了，那就可以直接暴力破解，user就直接用上面所知道的chris，密碼字典檔就使用kali自帶的rockyou.txt
+
+```
+hydra -l chris -P /usr/share/wordlists/rockyou.txt ftp://10.10.231.25
+```
+
+![image](https://user-images.githubusercontent.com/67756786/191737409-cd62334a-b2aa-47cb-ae72-9c2fad6a7584.png)
+
+
+- [x] Zip file password
+
+登入ftp
+
+```
+ftp -4 10.10.231.25
+```
+
+裡面有3個檔案
+![image](https://user-images.githubusercontent.com/67756786/191737778-9e06c5b0-a2df-4243-ae96-33e7fd616f33.png)
+
+全都下載下來，並離開
+```
+mget *
+```
+![image](https://user-images.githubusercontent.com/67756786/191738013-c9b2bd03-df0e-4315-898d-4442519ed0e6.png)
+
+但是題目說會需要zip password+steg password，有可能將檔案一起合併在圖片當中了請參考(https://ithelp.ithome.com.tw/m/articles/10278964)
+
+使用binwalk來確認架構+分解
+
+```
+binwalk cutie.png
+binwalk -e cutie.png
+```
+
+![image](https://user-images.githubusercontent.com/67756786/191739146-f0ca6795-5f5f-4c98-97c5-6f65578768a8.png)
+
+進入目錄後，發現8702.ZIP，解壓縮需要使用PASSWORD，解鎖ZIP PASSWORD很簡單，先使用zip2jhon取hash後再使用john破解即可
+```
+
+```
+
+- [x] steg password
+
+
+```
+```
+
+- [x] Who is the other agent (in full name)?
+
+
+```
+```
+
+- [x] SSH password
 
 ### Capture the user flag
 ### Privilege escalation
