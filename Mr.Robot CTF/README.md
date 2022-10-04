@@ -133,4 +133,32 @@ Now, login by robot,and confirm key2
 
 . [x] key3
 
+key3 under the root directory.
+Fist I confirm robot's privillege. Robot is common user not super user.
+
+![image](https://user-images.githubusercontent.com/67756786/193777451-e8cbdbc7-e0bc-4136-9b4b-9a5638da1da8.png)
+
+So we need privilege escalation.Fisrt, I try linpeans but not work.Second, I find SUID file to privilege escalation.
+
+```
+find / -perm -u=s -type f 2>/dev/null
+```
+
+![image](https://user-images.githubusercontent.com/67756786/193778841-d5360896-d57f-4dea-9594-dd39a1e6a6ab.png)
+
+Hint say namp , so we confirm namp privilege escalation from GFTOBins.
+
+![image](https://user-images.githubusercontent.com/67756786/193779436-78d850ac-203c-4e96-91f8-bbe7b2167973.png)
+
+Check nmap version
+
+![image](https://user-images.githubusercontent.com/67756786/193779509-f7bed3a7-43d7-4ef0-baeb-4447a9fb87fa.png)
+
+It's work!
+
+![image](https://user-images.githubusercontent.com/67756786/193779671-9b27d506-df96-482d-8b14-e1b6cbc07d87.png)
+
+cat key3
+
+![image](https://user-images.githubusercontent.com/67756786/193779863-81afcb87-d9a0-43ce-9c25-392535e58111.png)
 
