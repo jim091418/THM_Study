@@ -181,5 +181,9 @@ GTFOBins have privilege escalation method by env
 
 ![image](https://user-images.githubusercontent.com/67756786/195769806-8fe8bd4c-866b-4219-944f-d3ddfd1b566e.png)
 
+flag3 into /root dictory
+
+![image](https://user-images.githubusercontent.com/67756786/195770951-3eaf770f-00a9-4264-a973-da4db5812396.png)
+
 
 - [x] FLAG4
