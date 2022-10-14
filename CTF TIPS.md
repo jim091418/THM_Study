@@ -25,5 +25,8 @@ CTF TIPS
 ### PHP Reverse
   PHP Reverse shell(https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)
  
-    
+## PRIVILEGE ESCALATION
+### GTFBins
+
+WEB(https://gtfobins.github.io/)
     
