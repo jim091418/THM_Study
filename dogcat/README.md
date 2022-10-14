@@ -150,8 +150,24 @@ Later, I do it again, same method, and work!
 revereshell
 ![image](https://user-images.githubusercontent.com/67756786/195756571-aa5bc548-2fcc-4a9c-a1e6-e935aef44fcd.png)
 
+Now, we need to got four flag! I will use `find` to search flag
+
+```
+find * -name flag*
+```
+
+![image](https://user-images.githubusercontent.com/67756786/195767056-726c156b-0903-4424-9604-1396ff6c6123.png)
+
+and open that.
+
+![image](https://user-images.githubusercontent.com/67756786/195767322-991d0302-a03d-4ac1-b2b5-c240764b1bea.png)
 
 
 - [x] FLAG2
+
+![image](https://user-images.githubusercontent.com/67756786/195767344-8ca50948-1b04-47c2-bf49-1986efa95617.png)
+
 - [x] FLAG3
+
+
 - [x] FLAG4
