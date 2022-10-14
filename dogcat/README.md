@@ -169,5 +169,17 @@ and open that.
 
 - [x] FLAG3
 
+Usually, one of flag will be on the root dictory,and then we confirm www_data to can be root or not.
+```
+sudo -l
+```
+![image](https://user-images.githubusercontent.com/67756786/195769614-9a3adb49-accb-4f09-8af0-1507d7717aaa.png)
+
+GTFOBins have privilege escalation method by env
+
+![image](https://user-images.githubusercontent.com/67756786/195769742-863b904a-d754-4b83-ba55-24c5c3f5ae07.png)
+
+![image](https://user-images.githubusercontent.com/67756786/195769806-8fe8bd4c-866b-4219-944f-d3ddfd1b566e.png)
+
 
 - [x] FLAG4
