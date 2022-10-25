@@ -18,13 +18,13 @@ CTF TIPS
 ### enum4linux (smb scan)
   - Parameters
     `-a` simple scan enumeration (-U -S -G -P -r -o -n -i)  
-    `-U` enumeration user list
-    `-M` enumeration machine list
-    `-S` enumeration sharelist
-    `-P` get password policy informaion
-    `-G` get grop and number list
-    `-o` get os
-    `-i` get printer
+    `-U` enumeration user list  
+    `-M` enumeration machine list  
+    `-S` enumeration sharelist  
+    `-P` get password policy informaion  
+    `-G` get grop and number list  
+    `-o` get os  
+    `-i` get printer  
 ## REVERSE SHELL
 ### Python PTY
   1. `python3 -c 'import pty; pty.spawn("/bin/bash")'`  
