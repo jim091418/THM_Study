@@ -40,3 +40,6 @@ CTF TIPS
 
 WEB(https://gtfobins.github.io/)
     
+### SUID File
+
+`find / -perm -u=s -type f 2>/dev/null` can search suid file syntax  
