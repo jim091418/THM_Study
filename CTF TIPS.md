@@ -38,8 +38,8 @@ CTF TIPS
 ## PRIVILEGE ESCALATION
 ### GTFBins
 
-WEB(https://gtfobins.github.io/)
+  WEB(https://gtfobins.github.io/)
     
 ### SUID File
 
-`find / -perm -u=s -type f 2>/dev/null` can search suid file syntax  
+  `find / -perm -u=s -type f 2>/dev/null` can search suid file syntax  
